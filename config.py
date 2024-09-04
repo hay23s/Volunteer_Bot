@@ -12,7 +12,6 @@ MONGO_PASSWORD: Final[str] = os.getenv('MONGODB_PASSWORD')
 MONGO_DATABASE: Final[str] = os.getenv('MONGODB_DATABASE')
 MONGO_HOST: Final[str] = os.getenv('MONGODB_HOST')
 
-# Construct the MongoDB Atlas URI
 MONGO_URI = f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}/{MONGO_DATABASE}?retryWrites=true&w=majority"
 
 # Connect to MongoDB

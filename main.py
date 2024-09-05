@@ -107,19 +107,20 @@ async def show_schedule(interaction: discord.Interaction) -> None:
 
 # Function to send reminders for meetings that are starting in 30 minutes
 async def send_reminder() -> None:
-    now = datetime.now()  # Get the current time
-    upcoming = now + timedelta(minutes=30)  # Meetings starting in 30 minutes
+    now = datetime.now()
+    upcoming = now + timedelta(minutes=30)
 
-    # Find all volunteers who have meetings between now and the upcoming 30 minutes
+    # Find all volunteers who have meetings starting in the next 30 minutes
     volunteers = volunteers_collection.find({"meetings.date": {"$gte": now, "$lte": upcoming}})
 
-    for volunteer in volunteers:  # Loop through the volunteers
-        meetings = [m['date'] for m in volunteer['meetings'] if now <= m['date'] <= upcoming]  # Find meetings starting soon
-        if meetings: 
-            user = await bot.fetch_user(int(volunteer['discordId']))  # Fetch the user by their Discord ID
-            for meeting in meetings:  # Loop through the meetings
-                await user.send(f"Reminder: You have a meeting at {meeting} in 30 minutes!")  # Send a reminder to the user
-
+    for volunteer in volunteers:
+        meetings = [m['date'] for m in volunteer['meetings'] if now <= m['date'] <= upcoming]
+        if meetings:
+            # Fetch the user by their Discord ID and ping them in the message
+            user = await bot.fetch_user(int(volunteer['discordId']))
+            for meeting in meetings:
+                # Format the message to ping the user with their ID
+                await user.send(f"Hey <@{volunteer['discordId']}>, you have a meeting at {meeting} in 30 minutes!")
 
 # Schedule the send_reminder function to run every 1 minute
 scheduler = AsyncIOScheduler()  # Create  scheduler

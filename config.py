@@ -17,7 +17,6 @@ MONGO_URI = f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@{MONGO_HOST}/{MONGO_DA
 # Connect to MongoDB
 client = MongoClient(MONGO_URI)
 db = client[MONGO_DATABASE]
-collection = db['word_counts']
 
 def check_connection():
     try:

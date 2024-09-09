@@ -44,9 +44,8 @@ async def sync(ctx: commands.Context, guilds: commands.Greedy[discord.Object], s
             ctx.bot.tree.clear_commands(guild=ctx.guild)
             await ctx.bot.tree.sync(guild=ctx.guild)
             synced = []
-        else:  # Sync globally
+        else:  
             synced = await ctx.bot.tree.sync()
-
         await ctx.send(f"Synced {len(synced)} commands {'globally' if spec is None else 'to the current guild.'}")
         return
 

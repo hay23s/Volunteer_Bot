@@ -11,5 +11,3 @@ The **Discord Volunteer Bot** helps manage volunteers by allowing administrators
 - Google Sheets integration to store and manage volunteer data.
 - Automated volunteer role assignment based on participation.
 
-## Add the bot to the server with this link
-https://discord.com/oauth2/authorize?client_id=1280726383374372926
